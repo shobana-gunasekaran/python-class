@@ -1,0 +1,48 @@
+# Merge Sort Implementation in Python
+
+def merge_sort(arr):
+    # If the list is of length 1 or empty, return it as is (base case)
+    if len(arr) <= 1:
+        return arr
+    
+    # Step 1: Divide the list into two halves
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
+    
+    # Step 2: Recursively sort each half
+    left_sorted = merge_sort(left_half)
+    right_sorted = merge_sort(right_half)
+    
+    # Step 3: Merge the two sorted halves
+    return merge(left_sorted, right_sorted)
+
+def merge(left, right):
+    sorted_list = []
+    i = j = 0
+    
+    # Compare elements from left and right, and add the smaller one to the sorted list
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            sorted_list.append(left[i])
+            i += 1
+        else:
+            sorted_list.append(right[j])
+            j += 1
+    
+    # If there are remaining elements in left, append them
+    while i < len(left):
+        sorted_list.append(left[i])
+        i += 1
+    
+    # If there are remaining elements in right, append them
+    while j < len(right):
+        sorted_list.append(right[j])
+        j += 1
+    
+    return sorted_list
+
+# Example usage:
+arr = [38, 27, 43, 3, 9, 82, 10]
+sorted_arr = merge_sort(arr)
+print("Sorted array:", sorted_arr)
